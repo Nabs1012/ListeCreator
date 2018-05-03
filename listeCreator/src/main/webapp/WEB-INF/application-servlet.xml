@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<!-- Activation du scan du package controller pour analyser -->
+
+
+	<context:component-scan
+		base-package="controller" />
+
+	<mvc:annotation-driven />
+
+	<mvc:resources mapping="/js/**" location="/js/" />
+
+	<mvc:resources mapping="/css/**" location="/css/" />
+
+	<!-- Bean métier basique -->
+
+
+
+	<bean class="domaine.Tache" id="tache">
+
+		<constructor-arg value="1" type="Integer" />
+
+		<constructor-arg value="Musique" type="String" />
+
+		<constructor-arg value="Forte" type="String" />
+		<constructor-arg value="jouer de la guitare"
+			type="String" />
+	</bean>
+	<bean class="domaine.Login" id="log">
+
+		<constructor-arg value="1" type="Integer" />
+
+		<constructor-arg value="User" type="String" />
+
+	</bean>
+	<bean class="domaine.Utilisateur" id="utilisateur">
+
+		<constructor-arg value="1" type="Integer" />
+
+		<constructor-arg value="Sersoub" type="String" />
+
+		<constructor-arg value="Nabil" type="String" />
+		
+	</bean>
+	<!-- Bean de configuration Spring: Objet permettant de résoudre les noms 
+		de vues (ModelAndView) en page jsp -->
+
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		id="viewResolver">
+
+		<property value="/WEB-INF/views/" name="prefix" />
+
+		<property value=".jsp" name="suffix" />
+
+		<property
+			value="org.springframework.web.servlet.view.JstlView"
+			name="viewClass" />
+
+	</bean>
+
+	<!-- Configuration JPA -->
+
+
+
+	<bean
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		id="entityManagerFactory">
+
+		<property value="listeCreator" name="persistenceUnitName" />
+
+	</bean>
+
+
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager">
+
+		<property name="entityManagerFactory"
+			ref="entityManagerFactory" />
+
+	</bean>
+
+	<!-- Activation du scan du package repository pour analyser les interfaces 
+		et générer les implémentation CRUD++ -->
+
+
+	<jpa:repositories base-package="repository" />
+
+</beans>
