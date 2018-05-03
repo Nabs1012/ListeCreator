@@ -62,7 +62,7 @@ public class IndexController {
 
 	}
 	// Methode delete du crud 
-	@RequestMapping(path="/welcome" ,method=RequestMethod.DELETE)
+	@RequestMapping(path="/deleteTache")
 	ModelAndView deleteTache(@RequestParam Integer idTache ) {
 		
 		this.urepo.deleteById(idTache);

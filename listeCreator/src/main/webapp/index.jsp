@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:redirect url="/login.html"/>
+	<c:redirect url="/welcome.html"/>
 	
 </body>
 </html>

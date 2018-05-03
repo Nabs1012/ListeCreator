@@ -18,8 +18,8 @@
 			<p>${tache.tache }</p>
 		</div>
 		
-		
- <td><a class="btn btn-danger" href="deleteTache?idTache=<c:out value="${tache.idTache}"></c:out>">Supprimer Tache</a></td> 
+		<c:url value="/deleteTache" var="deleteUrl" />
+ <a class="btn btn-danger" href="${deleteUrl}?idTache=${tache.idTache}">Supprimer Tache</a>
 
 		
 												
