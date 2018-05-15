@@ -10,6 +10,7 @@
 <!-- </head> -->
 <jsp:include page="header.jsp"></jsp:include>
 <body>
+<div class="container">
 	<h1>TODO LIST</h1>
 	<c:forEach items="${listetache}" var="tache">
 		<div title="${tache.idTache }">
@@ -29,6 +30,6 @@
 	<c:url value="/form.html" var="createUrl"/>
 	<a href="${createUrl}"> clic ici!!!</a>
 	
-	
+	</div>
 </body>
 </html>

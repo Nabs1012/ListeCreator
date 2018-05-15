@@ -13,12 +13,17 @@ import org.springframework.web.servlet.ModelAndView;
 import domaine.Login;
 import domaine.Tache;
 import repository.UtilisateurRepository;
+import service.IService;
 
 @Controller
 public class IndexController {
 	
 	@Autowired
 	private Tache tache;
+	
+	@Autowired
+	private IService service;
+
 
 	@Autowired
 	private UtilisateurRepository urepo ;
@@ -47,6 +52,8 @@ public class IndexController {
 	ModelAndView displayForm () {
 		ModelAndView mav = new ModelAndView("formulaire");
 		
+		
+		
 		return mav;
 		
 	}
@@ -55,8 +62,10 @@ public class IndexController {
 	ModelAndView validateForm(@RequestParam String titre, @RequestParam String priorite , @RequestParam String tache) {
 		//Sauvegarder l'article en BDD.
 		final Tache nouvelleTache= new Tache(titre,priorite,tache);
-		this.urepo.save(nouvelleTache);
+		this.service.tachecreat(nouvelleTache);
+		
 		//Revoyer sur la page de liste des articles 
+	
 		return this.displayIndex();
 		
 
@@ -65,7 +74,7 @@ public class IndexController {
 	@RequestMapping(path="/deleteTache")
 	ModelAndView deleteTache(@RequestParam Integer idTache ) {
 		
-		this.urepo.deleteById(idTache);
+		this.service.tachesup(idTache);
 		return this.displayIndex();
 	}
 	public Tache getTache() {
